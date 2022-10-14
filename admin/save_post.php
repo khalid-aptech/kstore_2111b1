@@ -44,10 +44,13 @@ $author = $_SESSION["user_id"];
 
 
 
-$query = "INSERT INTO `post`(`title`, `description`, `category`, `post_date`, `author`, `post_img`) VALUES ('{$title}','{$discription}',{$category},'{$date}','{$author}','{$filename}')";
+$query = "INSERT INTO `post`(`title`, `description`, `category`, `post_date`, `author`, `post_img`) VALUES ('{$title}','{$discription}',{$category},'{$date}','{$author}','{$filename}');";
+$query .= "UPDATE `category` SET `post` = `post` + 1 Where `category_id` = '{$category}';";
 
 
-mysqli_query($conn, $query);
+mysqli_multi_query($conn, $query);
+
+header("location:http://localhost:82/kstore_2111b1/admin/products.php");
 
 
 
